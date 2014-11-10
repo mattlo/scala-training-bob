@@ -1,19 +1,12 @@
-object HumanTextTypeResolver {
-	def isYelling(text: String) : Boolean = {
-		text.matches("""^\b(?=.*[A-Z])[A-Z0-9\s,]+\b(|!|\?)$""")
-	}
-
-	def isAskingQuestion(text: String) : Boolean = {
-		text.matches("^(.*)\\?$")
-	}
-}
-
 trait Human {
-	def hey(text: String): String = {
-		getResponse(text)
-	}
+	def hey(text: String): String = getResponse(text)
 
 	protected def getResponse(text: String): String
+
+	object HumanTextTypeResolver {
+		def isYelling(text: String) : Boolean = text.matches("""^\b(?=.*[A-Z])[A-Z0-9\s,]+\b(|!|\?)$""")
+		def isAskingQuestion(text: String) : Boolean = text.matches("^(.*)\\?$")
+	}
 }
 
 class Bob extends Human {
